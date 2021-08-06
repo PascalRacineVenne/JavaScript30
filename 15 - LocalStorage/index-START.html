@@ -23,8 +23,8 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
       <button class="btn delete">Clear All</button>
-      <button class="btn button">Check All</button>
-      <button class="btn button">Uncheck All</button>
+      <button class="btn button" name="checkAll">Check All</button>
+      <button class="btn button" name="uncheckAll">Uncheck All</button>
     </form>
   </div>
 
@@ -70,14 +70,18 @@
   }
 
   function deleteAll(e) {
+    let items = [];
     localStorage.clear();
-    localStorage.setItem('items', JSON.stringify(items));
-    populateList([], itemsList);
+    window.location.reload();
   }
 
   function handleButton(e) {
+    items.forEach(function(item, index, array) {
+      e.target.name === 'checkAll'
+        ? (items[index].done = true)
+        : (items[index].done = false)
+    })
 
-    items.filter(el => el.done = !el.done);
     localStorage.setItem('items', JSON.stringify(items));
     populateList(items, itemsList);
   }
