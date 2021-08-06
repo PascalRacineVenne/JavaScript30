@@ -70,6 +70,12 @@ h2 {
   content: "🌮";
 }
 
+.btn {
+  color: gray;
+  padding: 4px;
+  margin: 8px;
+}
+
 .add-items {
   margin-top: 20px;
 }
