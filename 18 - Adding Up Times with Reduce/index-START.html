@@ -241,39 +241,42 @@
     </li>
   </ul>
 <script>
-  const total = document.querySelector('.total');
-  const byeByes = document.querySelectorAll('[data-time]');
-
   const timeNodes = Array.from(document.querySelectorAll('[data-time]'));
+
   const seconds = timeNodes
     .map(node => node.dataset.time)
+    // turn into seconds
     .map(timeCode => {
-      const [mins, secs] = timeCode.split(':').map(parseFloat)
-      return (mins * 60) + secs
-      console.log(mins, secs);
-    }).reduce((total, vidSeconds) => {
-      return total + vidSeconds;
+      // ES6 destructuring
+      const [ mins, secs ] = timeCode.split(':').map(parseFloat);
+      return (mins * 60) + secs;
     })
+    // take in an array and return anything you want
+    .reduce((total, vidSeconds) => total + vidSeconds);
 
-    let secondsLeft = seconds;
-    const hours = Math.floor(secondsLeft / 3600);
-    secondsLeft = secondsLeft % 3600;
+  let secondsLeft = seconds;
+  const hours = Math.floor(secondsLeft / 3600);
+  secondsLeft = secondsLeft % 3600;
 
-    const mins = Math.floor(secondsLeft / 60)
-    const minsDisplay = mins > 10 ? ((mins < 10) ? '0' :'') + mins : '00';
+  const mins = Math.floor(secondsLeft / 60);
+  secondsLeft = secondsLeft % 60;
 
-    secondsLeft = secondsLeft % 60;
-    const secsDisplay =
-      secondsLeft > 10 ? ((secondsLeft < 10) ? '0' :'') + secondsLeft : '00';
+  const total = document.querySelector('.total');
+  total.innerHTML = `Total time is: ${hours}:${mins}:${secondsLeft}`;
 
-  total.innerHTML = `Total time is ${hours}:${minsDisplay}:${secsDisplay}`
+  // REMOVE button Section
+  const byebyes = document.querySelectorAll('.remove');
 
-  function handleRemove(e) {
-    console.log(e);
+  const removeVid = (e) => {
+    const listItems = document.querySelectorAll('li');
+    for (const li of listItems) {
+
+    }
   }
 
-  byeByes.forEach(byeBye => byeBye.addEventListener('click', handleRemove));
-
+  for (const bye of byebyes) {
+    bye.addEventListener('click', removeVid);
+  }
 
 </script>
 </body>
